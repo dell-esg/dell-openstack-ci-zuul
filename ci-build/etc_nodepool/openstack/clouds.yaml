@@ -1,0 +1,17 @@
+clouds:
+  ci-cloud:
+    networks:
+    - name: nodepool
+      nat_destination: true
+    - name: public
+      nat_source: true
+    - name: private-iscsi
+      routes_externally: false
+    auth: 
+      auth_url: http://10.228.225.63/identity
+      project_name: nodepool
+      username: nodepool
+      password: dangerous
+      user_domain_name: Default
+      project_domain_name: Default
+    region_name: RegionOne

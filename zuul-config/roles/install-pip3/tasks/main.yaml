@@ -1,0 +1,12 @@
+- name: Update and Upgrade the system
+  apt:
+    update_cache: yes
+    upgrade: yes
+    dpkg_options: 'force-confold,force-confdef'
+  become: yes
+
+- name: Install pip3
+  apt:
+    name: python3-pip
+    state: latest
+  become: yes

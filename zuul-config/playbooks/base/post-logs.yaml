@@ -1,0 +1,20 @@
+- hosts: all
+  roles:
+    - role: fetch-output
+      zuul_output_dir: "{{ ansible_user_dir }}"
+    - merge-output-to-logs
+
+- hosts: localhost
+  gather_facts: False
+  roles:
+    - generate-zuul-manifest
+    - role: add-fileserver
+      fileserver: "{{ site_logs }}"
+
+- hosts: 10.228.225.15
+  gather_facts: False
+  roles:
+    - role: upload-logs
+      zuul_log_url:  "https://elab-os-logsrv.delllabs.net"
+      zuul_log_compress: false
+      zuul_logserver_root: "{{ site_logs.path }}"
